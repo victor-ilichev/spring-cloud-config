@@ -1,0 +1,49 @@
+spring:
+    application:
+        name: eureka-server
+    boot:
+        admin:
+            context-path: /admin
+    cloud:
+        stream:
+            bindings:
+                output:
+                    destination: streamNodeChangeTopic
+                    content-type: application/json
+                register:
+                    destination: streamNodeRegisterTopic
+                    content-type: application/json
+                unregister:
+                    destination: streamNodeUnRegisterTopic
+                    content-type: application/json
+            kafka:
+                binder:
+                    zkNodes: kafka
+                    brokers:
+                        - kafka:9092
+
+
+redis:
+    server: ostock-redis.ymengq.0001.use1.cache.amazonaws.com
+    port: 6379
+
+server:
+    port: 8123
+eureka:
+    instance:
+        hostname: eurekaserver
+    client:
+        registerWithEureka: false
+        fetchRegistry: false
+        serviceUrl:
+            defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+    server:
+        waitTimeInMsWhenSyncEmpty: 5
+
+
+management:
+    endpoints:
+        web:
+            exposure:
+                include: "*"
+   

@@ -1,0 +1,144 @@
+example.property: I AM THE DEFAULT
+
+server:
+    port: 8087
+
+signing:
+    key: "345345fsdfsf5345"
+
+logstash:
+    host: logstash
+    hostWithoutPort: logstash
+    port: 5000
+
+logging:
+    config: classpath:logback-delayed.xml
+
+spring:
+    database:
+        driverClassName: org.postgresql.Driver
+    datasource:
+        platform: postgres
+        testWhileIdle: true
+        validationQuery: SELECT 1
+    jpa:
+        database: POSTGRESQL
+        show-sql: true
+        hibernate:
+            ddl-auto: none
+            naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+    cloud:
+        loadbalancer:
+            ribbon:
+                enabled: false
+        stream:
+            bindings:
+                inboundOrgChanges:
+                    destination: orgChangeTopic
+                    content-type: application/json
+                    group: licensingGroup
+                register:
+                    destination: registerStreamNodeTopic
+                    content-type: application/json
+                    group: registerStreamNodeGroup
+            kafka:
+                binder:
+                    zkNodes: kafka
+                    brokers: kafka
+
+    zipkin:
+        baseUrl: http://zipkin:9411
+    sleuth:
+        sampler:
+            percentage: 1
+
+
+management:
+    endpoints:
+        web:
+            exposure:
+                include: "*"
+    enabled-by-default: true
+
+eureka:
+    client:
+        registerWithEureka: true
+        fetchRegistry: true
+        serviceUrl:
+            defaultZone: http://eurekaserver:8070/eureka/
+    instance:
+        api:
+            port: 80
+        preferIpAddress: true
+
+security:
+    oauth2:
+        resource:
+            userInfoUri: http://authenticationservice:8082/user
+        client:
+            grant-type: client_credentials
+
+redis:
+    server: redis
+    port: 6379
+
+keycloak:
+    realm: spmia-realm
+    auth-server-url: http://keycloak:8080/auth
+    ssl-required: external
+    resource: ostock
+    credentials.secret: 11764029-3707-4985-805d-df26d1d2bbeb
+    use-resource-role-mappings: true
+    bearer-only: true
+
+stream_manger:
+    api:
+        host: 0.0.0.0
+        port: 1450
+        urlWithoutSchema: 0.0.0.0:1450
+        httpReadTimeout: 10
+        httpWriteTimeout: 10
+        httpKeepalive: true
+        cert:
+        key:
+    rtmp:
+        host: 0.0.0.0
+        port: 1460
+        urlWithoutSchema: 0.0.0.0:1460
+        initPath: /tmp/dreamcam/
+    bss:
+        host: bss_nginx
+        port: 80
+        urlWithoutSchema: bss_nginx:80
+        urlWithSchema: http://bss_nginx:80
+    auto_connect_routing:
+        rtmp_to_server:
+
+dream:
+    instance:
+        api:
+            schema: http
+            host: 0.0.0.0
+            port: 80
+            read_timeout: 10
+            write_timeout: 10
+            keepalive: true
+            cert:
+            key:
+            connectInfoEndpoint:
+        bss:
+            url: http://dc-dream.dew:8090
+        kafka:
+            host: kafka:9092
+            group: streamNodeGroup
+            topic:
+                - registerStreamTopic
+                - unRegisterStreamTopic
+                - streamNodeRegisterTopic
+                - streamNodeUnRegisterTopic
+                - streamNotFoundTopic
+            max_retry: 5
+        config_name: I AM THE DEFAULT

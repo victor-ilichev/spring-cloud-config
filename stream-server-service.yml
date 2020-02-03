@@ -1,0 +1,173 @@
+example:
+    property: "I AM THE DEFAULT"
+
+logstash:
+    host: logstash
+    hostWithoutPort: logstash
+    port: 5000
+
+logging:
+    config: classpath:logback-delayed.xml
+
+spring:
+    jpa:
+        database: POSTGRESQL
+        datasource:
+            platform: postgres
+        show-sql: true
+        hibernate:
+            ddl-auto: none
+            naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+    database:
+        driverClassName: org.postgresql.Driver
+    datasource:
+        testWhileIdle: true
+        validationQuery: SELECT 1
+    cloud:
+        loadbalancer:
+            ribbon:
+                enabled: false
+        stream:
+            bindings:
+                inboundOrgChanges:
+                    destination: orgChangeTopic
+                    content-type: application/json
+                    group: licensingGroup
+            kafka:
+                binder:
+                    zkNodes: kafka
+                    brokers: kafka
+    zipkin:
+        baseUrl: http://zipkin:9411
+    sleuth:
+        sampler:
+            percentage: 1
+
+
+
+server:
+    port: 8087
+
+management:
+    endpoints:
+        web:
+            exposure:
+                include: "*"
+        enabled-by-default: true
+
+eureka:
+    instance:
+        preferIpAddress: true
+        api:
+            port: 80
+    client:
+        registerWithEureka: true
+        fetchRegistry: true
+        serviceUrl:
+            defaultZone: http://eurekaserver:8070/eureka/
+
+security:
+    oauth2:
+        resource:
+            userInfoUri: http://authenticationservice:8082/user
+        client:
+            grant-type: client_credentials
+        signing:
+            key: "345345fsdfsf5345"
+
+redis:
+    server: redis
+    port: 6379
+
+keycloak:
+    realm: spmia-realm
+    auth-server-url: http://keycloak:8080/auth
+    ssl-required: external
+    resource: ostock
+    credentials:
+        secret: 11764029-3707-4985-805d-df26d1d2bbeb
+    use-resource-role-mappings: true
+    bearer-only: true
+
+stream_server:
+    api:
+        schema: http
+        host: 0.0.0.0
+        port: 1450
+        urlWithoutSchema: 0.0.0.0:1450
+        httpReadTimeout: 10
+        httpWriteTimeout: 10
+        httpKeepalive: true
+        cert:
+        key:
+        servers:
+            - http://stream_server:1450
+            - http://stream_server:1451
+            - http://stream_server:1452
+    rtmp:
+        host: 0.0.0.0
+        port: 1460
+        urlWithoutSchema: 0.0.0.0:1460
+        muxerBufferSize: 300
+    hls:
+        mode: 2
+        buffer: 10
+        initialDuration: 2
+        fragmentLength: 500
+        viewerWaiting: 6s
+        needCORSHeaders: true
+        minSegmentsNum: 10
+    manager_client:
+        urlWithoutSchema: 0.0.0.0:1460
+    snap:
+        interval: 1m30s
+        allowedOnErrorRetries: 3
+    streamDecoderAPI:
+        host: http://stream_decoder:8484
+    stream_manager:
+        node_info:
+            region: europe
+            type: server
+            name: europe
+            host: europe
+        server:
+            localDebugMode: true
+            name: stream-d
+            muxer:
+                bufferSize: 300
+                keyItWarn: 2
+                maxFrames: 10
+                buffer: 3000000
+                audioSize: 4096
+            reStream:
+                request_duration: 30
+        rating_server:
+            url: http://rating_server.hz
+        profiler:
+            enable: false
+            host:
+
+dream:
+    instance:
+        bss:
+            url: http://dc-dream.dew:8090
+        kafka:
+            host: kafka:9092
+            group: streamNodeGroup
+            topic:
+                - streamNodeChangeTopic
+                - FooHlsStreamTopic
+            max_retry: 5
+        api:
+            schema: http
+            host: 0.0.0.0
+            port: 80
+            read_timeout: 12
+            write_timeout: 12
+            keepalive: true
+            cert:
+            key:
+            connectInfoEndpoint:

@@ -1,0 +1,7 @@
+{
+    "env_name": "default",
+    "api": {
+        "host": "localhost",
+        "port": 5000
+    }
+}
