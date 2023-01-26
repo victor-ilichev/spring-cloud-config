@@ -95,9 +95,9 @@ stream_manger:
 
     auto_connect_routing:
         rtmp_to_server:
-            - name: Europe rule
-              src: 85f87f85-6674-427d-93b7-6aaaa7e6b644
-              dst: aadc6520-e467-4976-a325-00cd621b8848
-            - name: Asia rule
-              src: 7b5162f3-028a-466c-b006-5900e3a86d37
-              dst: e1405e96-66b1-4614-bedf-d2059521e442
+            -   name: Europe rule
+                src: 85f87f85-6674-427d-93b7-6aaaa7e6b644
+                dst: aadc6520-e467-4976-a325-00cd621b8848
+            -   name: Asia rule
+                src: 7b5162f3-028a-466c-b006-5900e3a86d37
+                dst: e1405e96-66b1-4614-bedf-d2059521e442
