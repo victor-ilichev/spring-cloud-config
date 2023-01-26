@@ -47,6 +47,20 @@ spring:
           filters:
             - RewritePath=/ds-model-analytics/(?<path>.*), /$\{path}
             - RemoveRequestHeader= Cookie,Set-Cookie
+        - id: ds-rtmp-pull-service
+          uri: lb://ds-rtmp-pull-service
+          predicates:
+            - Path=/ds-rtmp-pull/**
+          filters:
+            - RewritePath=/ds-rtmp-pull/(?<path>.*), /$\{path}
+            - RemoveRequestHeader= Cookie,Set-Cookie
+        - id: ds-stream-manager-service
+          uri: lb://ds-stream-manager-service
+          predicates:
+            - Path=/ds-stream-manager/**
+          filters:
+            - RewritePath=/ds-model-analytics/(?<path>.*), /$\{path}
+            - RemoveRequestHeader= Cookie,Set-Cookie
 
 
 keycloak:
