@@ -24,8 +24,6 @@ spring:
         testWhileIdle: true
         validationQuery: SELECT 1
 
-    cloud.loadbalancer.ribbon.enabled: false
-
     cloud:
         stream:
             bindings:
@@ -37,6 +35,8 @@ spring:
                 binder:
                     zkNodes: kafka
                     brokers: kafka
+        loadbalancer:
+            ribbon.enabled: false
 
     zipkin:
         baseUrl: http://zipkin:9411
@@ -50,7 +50,7 @@ server.port: 8087
 management:
     endpoints:
         web:
-            exposure.include: *
+            exposure.include: "*"
             enabled-by-default: true
 
 eureka:
