@@ -59,7 +59,7 @@ spring:
           predicates:
             - Path=/ds-stream-manager/**
           filters:
-            - RewritePath=/ds-model-analytics/(?<path>.*), /$\{path}
+            - RewritePath=/ds-stream-manager/(?<path>.*), /$\{path}
             - RemoveRequestHeader= Cookie,Set-Cookie
 
 
