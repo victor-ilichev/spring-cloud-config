@@ -61,6 +61,13 @@ spring:
           filters:
             - RewritePath=/ds-stream-manager/(?<path>.*), /$\{path}
             - RemoveRequestHeader= Cookie,Set-Cookie
+        - id: ds-stream-server-service
+          uri: lb://ds-stream-server-service
+          predicates:
+            - Path=/ds-stream-server/**
+          filters:
+            - RewritePath=/ds-stream-server/(?<path>.*), /$\{path}
+            - RemoveRequestHeader= Cookie,Set-Cookie
 
 
 keycloak:
