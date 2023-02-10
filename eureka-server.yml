@@ -1,26 +1,43 @@
 spring:
-  application:
-    name: eureka-server
-  boot:
-    admin:
-      context-path: /admin
+    application:
+        name: eureka-server
+    boot:
+        admin:
+            context-path: /admin
+    cloud:
+        stream:
+            bindings:
+                inboundOrgChanges:
+                    destination: orgChangeTopic
+                    content-type: application/json
+                    contentType: application/json
+            kafka:
+                binder:
+                    zkNodes: kafka
+                    brokers: kafka
+
+
+redis:
+    server: ostock-redis.ymengq.0001.use1.cache.amazonaws.com
+    port: 6379
+
 server:
-  port: 8070
+    port: 8070
 eureka:
-  instance:
-    hostname: eurekaserver
-  client:
-    registerWithEureka: false
-    fetchRegistry: false
-    serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
-  server:
-    waitTimeInMsWhenSyncEmpty: 5
-      
-      
+    instance:
+        hostname: eurekaserver
+    client:
+        registerWithEureka: false
+        fetchRegistry: false
+        serviceUrl:
+            defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+    server:
+        waitTimeInMsWhenSyncEmpty: 5
+
+
 management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
+    endpoints:
+        web:
+            exposure:
+                include: "*"
    
