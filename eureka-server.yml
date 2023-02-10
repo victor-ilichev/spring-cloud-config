@@ -7,10 +7,15 @@ spring:
     cloud:
         stream:
             bindings:
-                inboundOrgChanges:
-                    destination: orgChangeTopic
+                output:
+                    destination: streamNodeTopic
                     content-type: application/json
                     contentType: application/json
+#                inboundOrgChanges:
+#                inboundStreamNode:
+#                    destination: streamNodeTopic
+#                    content-type: application/json
+#                    contentType: application/json
             kafka:
                 binder:
                     zkNodes: kafka
