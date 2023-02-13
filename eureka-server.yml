@@ -8,14 +8,8 @@ spring:
         stream:
             bindings:
                 output:
-                    destination: streamNodeTopic
+                    destination: streamNodeChangeTopic
                     content-type: application/json
-                    contentType: application/json
-#                inboundOrgChanges:
-#                inboundStreamNode:
-#                    destination: streamNodeTopic
-#                    content-type: application/json
-#                    contentType: application/json
             kafka:
                 binder:
                     zkNodes: kafka
