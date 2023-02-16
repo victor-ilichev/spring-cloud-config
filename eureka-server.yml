@@ -10,6 +10,12 @@ spring:
                 output:
                     destination: streamNodeChangeTopic
                     content-type: application/json
+                register:
+                    destination: streamNodeRegisterTopic
+                    content-type: application/json
+                unregister:
+                    destination: streamNodeUnRegisterTopic
+                    content-type: application/json
             kafka:
                 binder:
                     zkNodes: kafka
