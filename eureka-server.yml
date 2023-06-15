@@ -27,7 +27,7 @@ redis:
     port: 6379
 
 server:
-    port: 8070
+    port: 8123
 eureka:
     instance:
         hostname: eurekaserver
