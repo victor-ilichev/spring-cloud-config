@@ -1,0 +1,119 @@
+example.property: I AM THE DEFAULT
+
+logstash:
+    host: logstash:5000
+    hostWithoutPort: logstash
+    port: 5000
+
+logging.config: classpath:logback-delayed.xml
+
+spring:
+    jpa:
+        hibernate.ddl-auto: none
+        database: POSTGRESQL
+        show-sql: true
+        hibernate.naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+        properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+    database.driverClassName: org.postgresql.Driver
+    datasource:
+        platform: postgres
+        testWhileIdle: true
+        validationQuery: SELECT 1
+    cloud:
+        loadbalancer.ribbon.enabled: false
+    stream:
+        bindings.inboundOrgChanges.destination: orgChangeTopic
+        bindings.inboundOrgChanges.content-type: application/json
+        bindings.inboundOrgChanges.group: licensingGroup
+        kafka.binder.zkNodes: kafka
+        kafka.binder.brokers: kafka
+    zipkin:
+        baseUrl: http://zipkin:9411
+    sleuth:
+        sampler.percentage: 1
+
+server:
+    port: 8087
+
+signing.key: "345345fsdfsf5345"
+
+management:
+    endpoints:
+        web:
+            exposure.include: "*"
+        enabled-by-default: true
+
+eureka:
+    client:
+        registerWithEureka: true
+        fetchRegistry: true
+        serviceUrl:
+            defaultZone: http://eurekaserver:8070/eureka/
+#        healthcheck.enabled: true
+    instance:
+        api:
+            port: 80
+        preferIpAddress: true
+
+security:
+    oauth2:
+        resource.userInfoUri: http://authenticationservice:8082/user
+        client.grant-type: client_credentials
+
+redis:
+    server: redis
+    port: 6379
+
+keycloak:
+    realm: spmia-realm
+    auth-server-url: http://keycloak:8080/auth
+    ssl-required: external
+    resource: ostock
+    credentials.secret: 11764029-3707-4985-805d-df26d1d2bbeb
+    use-resource-role-mappings: true
+    bearer-only: true
+
+rtmp_pull:
+    api:
+        host: 0.0.0.0
+        port: 1455
+        urlWithoutSchema: 0.0.0.0:1455
+        schema: http
+        httpReadTimeout: 10
+        httpWriteTimeout: 10
+        httpKeepalive: true
+        cert:
+        key:
+    rtmp:
+        host: 0.0.0.0
+        port: 1460
+        urlWithoutSchema: 0.0.0.0:1460
+        muxerBufferSize: 300
+    manager_client:
+        urlWithoutSchema: 0.0.0.0:1460
+
+dream:
+    instance:
+        config_name: I AM THE DEFAULT
+        bss:
+            url: http://dc-dream.dew:8090
+        kafka:
+            host: kafka:9092
+            group: streamNodeGroup
+            topic:
+                - streamNodeChangeTopic
+            max_retry: 5
+        api:
+            schema: http
+            host: 0.0.0.0
+            port: 81
+            read_timeout: 12
+            write_timeout: 12
+            keepalive: true
+            cert:
+            key:
+            connectInfoEndpoint:
+
+stream_manager_client:
+    manager:
+        url: http://127.0.0.1:1471
