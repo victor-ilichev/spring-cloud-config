@@ -1,0 +1,17 @@
+example.property: I AM THE PRE
+
+dream:
+    instance:
+        config_name: I AM THE PRE
+        bss:
+            url: http://bss.pre.dreamcamtrue.com:8600
+
+stream_server:
+    bss:
+        url: http://bss.pre.dreamcamtrue.com:8600
+    rtmp:
+        muxer:
+            audioTimebase: 44102
+            videoTimebase: 90002
+    streamDecoderAPI:
+        host: https://stream-decoder-pre.dreamcamtrue.com/

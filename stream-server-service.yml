@@ -1,29 +1,37 @@
-example:
-    property: "I AM THE DEFAULT"
+example.property: I AM THE DEFAULT
+
+server:
+    port: 8087
+
+signing:
+    key: "345345fsdfsf5345"
 
 logstash:
-    host: logstash
+    host: logstash:5000
     hostWithoutPort: logstash
     port: 5000
+    isEnabled: false
 
 logging:
     config: classpath:logback-delayed.xml
 
+logger:
+    debug_level: "debug"
+
 spring:
     jpa:
-        database: POSTGRESQL
-        datasource:
-            platform: postgres
-        show-sql: true
         hibernate:
             ddl-auto: none
             naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+        database: POSTGRESQL
+        show-sql: true
         properties:
             hibernate:
                 dialect: org.hibernate.dialect.PostgreSQLDialect
     database:
         driverClassName: org.postgresql.Driver
     datasource:
+        platform: postgres
         testWhileIdle: true
         validationQuery: SELECT 1
     cloud:
@@ -38,45 +46,38 @@ spring:
                     group: licensingGroup
             kafka:
                 binder:
-                    zkNodes: kafka
-                    brokers: kafka
+                    zkNodes:
+                        - kafka
+                    brokers:
+                        - kafka
     zipkin:
         baseUrl: http://zipkin:9411
     sleuth:
         sampler:
             percentage: 1
 
-
-
-server:
-    port: 8087
-
 management:
     endpoints:
         web:
-            exposure:
-                include: "*"
+            exposure.include: "*"
         enabled-by-default: true
 
 eureka:
-    instance:
-        preferIpAddress: true
-        api:
-            port: 80
+    isEnabled: false
     client:
         registerWithEureka: true
         fetchRegistry: true
         serviceUrl:
             defaultZone: http://eurekaserver:8070/eureka/
+    instance:
+        api:
+            port: 80
+        preferIpAddress: true
 
 security:
     oauth2:
-        resource:
-            userInfoUri: http://authenticationservice:8082/user
-        client:
-            grant-type: client_credentials
-        signing:
-            key: "345345fsdfsf5345"
+        resource.userInfoUri: http://authenticationservice:8082/user
+        client.grant-type: client_credentials
 
 redis:
     server: redis
@@ -87,80 +88,29 @@ keycloak:
     auth-server-url: http://keycloak:8080/auth
     ssl-required: external
     resource: ostock
-    credentials:
-        secret: 11764029-3707-4985-805d-df26d1d2bbeb
+    credentials.secret: 11764029-3707-4985-805d-df26d1d2bbeb
     use-resource-role-mappings: true
     bearer-only: true
 
-stream_server:
-    api:
-        schema: http
-        host: 0.0.0.0
-        port: 1450
-        urlWithoutSchema: 0.0.0.0:1450
-        httpReadTimeout: 10
-        httpWriteTimeout: 10
-        httpKeepalive: true
-        cert:
-        key:
-        servers:
-            - http://stream_server:1450
-            - http://stream_server:1451
-            - http://stream_server:1452
-    rtmp:
-        host: 0.0.0.0
-        port: 1460
-        urlWithoutSchema: 0.0.0.0:1460
-        muxerBufferSize: 300
-    hls:
-        mode: 2
-        buffer: 10
-        initialDuration: 2
-        fragmentLength: 500
-        viewerWaiting: 6s
-        needCORSHeaders: true
-        minSegmentsNum: 10
-    manager_client:
-        urlWithoutSchema: 0.0.0.0:1460
-    snap:
-        interval: 1m30s
-        allowedOnErrorRetries: 3
-    streamDecoderAPI:
-        host: http://stream_decoder:8484
-    stream_manager:
-        node_info:
-            region: europe
-            type: server
-            name: europe
-            host: europe
-        server:
-            localDebugMode: true
-            name: stream-d
-            muxer:
-                bufferSize: 300
-                keyItWarn: 2
-                maxFrames: 10
-                buffer: 3000000
-                audioSize: 4096
-            reStream:
-                request_duration: 30
-        rating_server:
-            url: http://rating_server.hz
-        profiler:
-            enable: false
-            host:
-
 dream:
     instance:
+        config_name: I AM THE DEFAULT
         bss:
-            url: http://dc-dream.dew:8090
+            url: http://bss.dev.dreamcamtrue.com:8600
         kafka:
-            host: kafka:9092
-            group: streamNodeGroup
+            host: kaf1-metallb.px1-wlzone.dreamcamtrue.com:9094
+            sasl_mechanism: SCRAM-SHA-256
+            security_protocol: SASL_PLAINTEXT
+            username: user1
+            password: TpjstVcGeX
             topic:
                 - streamNodeChangeTopic
-                - FooHlsStreamTopic
             max_retry: 5
+            is_enabled: false
+            producer:
+                group: streamNodeGroup
+            consumer:
+                group: streamNodeGroup
         api:
             schema: http
             host: 0.0.0.0
@@ -171,3 +121,101 @@ dream:
             cert:
             key:
             connectInfoEndpoint:
+
+stream_manager_client:
+    manager:
+        url: http://gateway:8072/ds-stream-manager
+    api:
+        host: 127.0.0.1
+        port: 85
+        url: http://0.0.0.0:85
+        urlWithoutSchema: 0.0.0.0:85
+        httpReadTimeout: 10
+        httpWriteTimeout: 10
+        httpKeepalive: true
+        cert: ""
+        key: ""
+
+stream_server:
+    bss:
+        url: http://bss.dev.dreamcamtrue.com:8600
+    server:
+        localDebugMode: false
+        name: stream-d
+        muxer:
+            bufferSize: 300
+            keyItWarn: 2
+            maxFrames: 10
+            buffer: 3000000
+            audioSize: 4096
+        reStream:
+            request_duration: 30
+    profiler:
+        enable: false
+        host: 0.0.0.0
+        port: 6060
+        urlWithoutSchema: 0.0.0.0:6060
+    log:
+        path: /proc/self/fd/2
+        level: 4
+        stdout: true
+        tag: stream-dreamcam
+    api:
+        schema: http
+        host: 0.0.0.0
+        port: 1450
+        urlWithoutSchema: 0.0.0.0:1450
+        httpReadTimeout: 10
+        httpWriteTimeout: 10
+        httpKeepalive: true
+        cert:
+        key:
+    rtmp:
+        host: 0.0.0.0
+        port: 11430
+        urlWithoutSchema: 0.0.0.0:11430
+        muxerBufferSize: 300
+        maxGopCount: 2
+        muxer:
+            audioTimebase: 44100
+            videoTimebase: 90000
+    hls:
+        mode: 0
+        buffer: 2
+        initialDuration: 2
+        fragmentLength: 500
+        minSegmentsNum: 10
+        viewerWaiting: 2s
+        needCORSHeaders: false
+        muxerBufferSize: 300
+        maxGopCount: 2
+    mp4:
+        muxerBufferSize: 300
+        maxGopCount: 2
+    socket:
+        host: 0.0.0.0
+        port: 1444
+        writeDeadLine: 2
+        keyframeStart: true
+        pullTimeout: 2
+        servers:
+            - ws://0.0.0.0:1444
+        pushDump:
+            enable: false
+            dir: /dev/shm
+    rating_server:
+        url: http://rating_server.hz
+        is_enabled: false
+    manager_client:
+        urlWithoutSchema: 0.0.0.0:1460
+    stream_manager:
+        node_info:
+            region: europe
+            type: server
+            name: europe
+            host: europe
+    snap:
+        interval: 1m30s
+        allowedOnErrorRetries: -1
+    streamDecoderAPI:
+        host: http://localhost/

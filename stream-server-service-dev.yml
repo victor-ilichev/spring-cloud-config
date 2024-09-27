@@ -1,0 +1,24 @@
+example.property: I AM THE DEV 123
+
+dream:
+    instance:
+        config_name: I AM THE DEV
+        bss:
+            url: http://bss.dev.dreamcamtrue.com:8600
+
+stream_server:
+    bss:
+        url: http://bss.dev.dreamcamtrue.com:8600
+    server:
+        localDebugMode: true
+    rtmp:
+        port: 1460
+        initPath: ./temp/
+        muxer:
+            audioTimebase: 44101
+            videoTimebase: 90001
+    hls:
+        buffer: 3
+        needCORSHeaders: true
+    streamDecoderAPI:
+        host: http://192.168.1.109:8484/

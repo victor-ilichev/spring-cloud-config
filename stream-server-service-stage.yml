@@ -1,0 +1,17 @@
+example.property: I AM THE STAGE
+
+dream:
+    instance:
+        config_name: I AM THE STAGE
+        bss:
+            url: http://bss.stage.dreamcamtrue.com:8600
+
+stream_server:
+    bss:
+        url: http://bss.stage.dreamcamtrue.com:8600
+    rtmp:
+        muxer:
+            audioTimebase: 44103
+            videoTimebase: 90003
+    streamDecoderAPI:
+        host: https://stream-decoder-stage.dreamcamtrue.com/
