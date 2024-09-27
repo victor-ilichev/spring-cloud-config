@@ -1,0 +1,22 @@
+example.property: I AM THE PROD
+
+logger:
+    debug_level: "error"
+
+dream:
+    instance:
+        config_name: I AM THE PROD
+        bss:
+            url: http://bss.dreamcamtrue.com:8600
+
+stream_server:
+    bss:
+        url: http://bss.dreamcamtrue.com:8600
+    rtmp:
+        muxer:
+            audioTimebase: 44104
+            videoTimebase: 90004
+    snap:
+        interval: 4m
+    streamDecoderAPI:
+        host: https://stream-decoder.dreamcamtrue.com/
