@@ -1,0 +1,6 @@
+example.property: I AM THE LOCAL DEV EU FOO
+
+spring:
+    config:
+        import:
+            - "classpath:/config/mp-rtmp-pull-service.yml"
