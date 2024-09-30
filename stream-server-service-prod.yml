@@ -1,5 +1,8 @@
 example.property: I AM THE PROD
 
+server:
+    port: 7777
+
 logger:
     debug_level: "error"
 
