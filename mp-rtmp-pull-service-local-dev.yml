@@ -1,0 +1,29 @@
+example.property: I AM THE LOCAL DEV
+
+eureka:
+    is_enabled: true
+    client:
+        registerWithEureka: true
+        fetchRegistry: true
+        serviceUrl:
+            defaultZone: http://eurekaserver:8070/eureka/
+    #        healthcheck.enabled: true
+    instance:
+        api:
+            port: 1501
+        preferIpAddress: true
+
+dream:
+    instance:
+        api:
+            port: 1502
+            urlWithoutSchema: 0.0.0.0:1502
+
+rtmp_pull:
+    api:
+        port: 1502
+        urlWithoutSchema: 0.0.0.0:1502
+    rtmp:
+        host: 0.0.0.0
+        port: 1470
+        urlWithoutSchema: 0.0.0.0:1470
