@@ -179,6 +179,15 @@ stream_server:
         muxer:
             audioTimebase: 44100
             videoTimebase: 90000
+    srt:
+        host: 0.0.0.0
+        port: 11530
+        urlWithoutSchema: 0.0.0.0:11530
+        muxerBufferSize: 300
+        maxGopCount: 2
+        muxer:
+            audioTimebase: 44100
+            videoTimebase: 90000
     hls:
         mode: 0
         buffer: 2
