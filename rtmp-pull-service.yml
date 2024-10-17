@@ -1,9 +1,13 @@
 example.property: I AM THE DEFAULT
 
 logstash:
-    host: logstash:5000
-    hostWithoutPort: logstash
+    host: http://elk.dreamcamtrue.com:5000
+    hostWithoutPort: http://elk.dreamcamtrue.com
     port: 5000
+    isEnabled: false
+    ttl: 30
+    connection_type: tcp
+
 
 logging.config: classpath:logback-delayed.xml
 
