@@ -176,6 +176,7 @@ stream_server:
         urlWithoutSchema: 0.0.0.0:11430
         muxerBufferSize: 300
         maxGopCount: 2
+        InitPath: ./fmp4/
         muxer:
             audioTimebase: 44100
             videoTimebase: 90000
@@ -185,6 +186,7 @@ stream_server:
         urlWithoutSchema: 0.0.0.0:11530
         muxerBufferSize: 300
         maxGopCount: 2
+        InitPath: ./fmp4/
         muxer:
             audioTimebase: 44100
             videoTimebase: 90000
