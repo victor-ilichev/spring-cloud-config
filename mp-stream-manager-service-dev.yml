@@ -134,9 +134,9 @@ dream:
         bss:
             url: http://dc-dream.dew:8090
         kafka:
-            host: kafka:9092
+            bootstrap_servers: kafka:9092
             group: streamNodeGroup
-            topic:
+            topics:
                 - registerStreamTopic
                 - unRegisterStreamTopic
                 - streamNodeRegisterTopic

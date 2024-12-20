@@ -1,13 +1,12 @@
 example.property: I AM THE DEFAULT
 
 logstash:
-    host: http://elk.dreamcamtrue.com:5000
-    hostWithoutPort: http://elk.dreamcamtrue.com
+    host: elk.dreamcamtrue.com
+    hostWithoutPort: tcp://elk.dreamcamtrue.com
     port: 5000
     isEnabled: false
     ttl: 30
     connection_type: tcp
-
 
 logging.config: classpath:logback-delayed.xml
 
@@ -25,12 +24,12 @@ spring:
         validationQuery: SELECT 1
     cloud:
         loadbalancer.ribbon.enabled: false
-    stream:
-        bindings.inboundOrgChanges.destination: orgChangeTopic
-        bindings.inboundOrgChanges.content-type: application/json
-        bindings.inboundOrgChanges.group: licensingGroup
-        kafka.binder.zkNodes: kafka
-        kafka.binder.brokers: kafka
+        stream:
+            bindings.inboundOrgChanges.destination: orgChangeTopic
+            bindings.inboundOrgChanges.content-type: application/json
+            bindings.inboundOrgChanges.group: licensingGroup
+            kafka.binder.zkNodes: kafka
+            kafka.binder.brokers: kafka
     zipkin:
         baseUrl: http://zipkin:9411
     sleuth:
@@ -48,12 +47,13 @@ management:
         enabled-by-default: true
 
 eureka:
+    is_enabled: true
     client:
         registerWithEureka: true
         fetchRegistry: true
         serviceUrl:
             defaultZone: http://eurekaserver:8070/eureka/
-#        healthcheck.enabled: true
+    #        healthcheck.enabled: true
     instance:
         api:
             port: 80
@@ -102,20 +102,34 @@ dream:
         bss:
             url: http://dc-dream.dew:8090
         kafka:
-            bootstrap_servers: kafka:9092
-            group: streamNodeGroup
+            bootstrap_servers: kaf1-metallb.px1-wlzone.dreamcamtrue.com:9094
+            sasl_mechanism: SCRAM-SHA-256
+            security_protocol: SASL_PLAINTEXT
+            username: user1
+            password: TpjstVcGeX
             topics: []
             max_retry: 5
+            is_enabled: true
+            producer:
+                group: streamNodeGroup
+            consumer:
+                group: streamNodeGroup
         api:
             schema: http
             host: 0.0.0.0
-            port: 81
+            port: 1501
             read_timeout: 12
             write_timeout: 12
             keepalive: true
             cert:
             key:
             connectInfoEndpoint:
+
+actuator:
+    enabled: true
+    port: 8081
+    name: actuator
+    env: dev
 
 stream_manager_client:
     manager:

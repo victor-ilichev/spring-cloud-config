@@ -9,6 +9,14 @@ dream:
 stream_server:
     bss:
         url: http://bss.stage.dreamcamtrue.com:8600
+        kafka:
+            bootstrap_servers: kaf1-metallb.px1-wlzone.stage.dreamcamtrue.com:9094
+            auto_offset_reset: earliest
+            sasl_mechanism: SCRAM-SHA-256
+            security_protocol: SASL_PLAINTEXT
+            username: stage-user1
+            password: stage-TpjstVcGeX
+            is_enabled: true
     rtmp:
         muxer:
             audioTimebase: 44103

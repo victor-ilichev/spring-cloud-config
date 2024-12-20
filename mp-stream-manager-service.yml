@@ -64,6 +64,7 @@ management:
     enabled-by-default: true
 
 eureka:
+    is_enabled: true
     client:
         registerWithEureka: true
         fetchRegistry: true
@@ -132,9 +133,20 @@ dream:
         bss:
             url: http://dc-dream.dew:8090
         kafka:
-            host: kafka:9092
-            group: streamNodeGroup
-            topic:
+            is_enabled: true
+            bootstrap_servers: kafka:9092
+            auto_offset_reset: earliest
+            sasl_mechanism: SCRAM-SHA-256
+            security_protocol: SASL_PLAINTEXT
+            username: stream-manager
+            password: stream-manager-password
+            client:
+                id: stream-server-service
+            producer:
+                group: streamManagerGroup
+            consumer:
+                group: streamManagerGroup
+            topics:
                 - registerStreamTopic
                 - unRegisterStreamTopic
                 - streamNodeRegisterTopic

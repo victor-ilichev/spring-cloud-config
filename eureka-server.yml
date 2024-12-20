@@ -7,17 +7,31 @@ spring:
     cloud:
         stream:
             bindings:
-                output:
-                    destination: streamNodeChangeTopic
+                renewChannel:
+                    destination: streamNodeRenewTopic
                     content-type: application/json
-                register:
+                registerChannel:
                     destination: streamNodeRegisterTopic
                     content-type: application/json
-                unregister:
+                unregisterChannel:
                     destination: streamNodeUnRegisterTopic
                     content-type: application/json
+            binders:
+                kafka1:
+                    type: kafka
+                    environment:
+                        spring:
+                            cloud:
+                                stream:
+                                    kafka:
+                                        binder:
+                                            brokers: localhost:9092
+                                            configuration.sasl.jaas.config: "org.apache.kafka.common.security.scram.ScramLoginModule required username=\"admin\" password=\"admin-secret\";"
             kafka:
                 binder:
+                    configuration:
+                        security.protocol: SASL_PLAINTEXT
+                        sasl.mechanism: SCRAM-SHA-256
                     zkNodes: kafka
                     brokers:
                         - kafka:9092
@@ -28,7 +42,7 @@ redis:
     port: 6379
 
 server:
-    port: 8123
+    port: 8070
 eureka:
     instance:
         hostname: eurekaserver

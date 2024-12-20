@@ -63,7 +63,7 @@ management:
         enabled-by-default: true
 
 eureka:
-    isEnabled: false
+    is_enabled: true
     client:
         registerWithEureka: true
         fetchRegistry: true
@@ -98,18 +98,19 @@ dream:
         bss:
             url: http://bss.dev.dreamcamtrue.com:8600
         kafka:
-            bootstrap_servers: kaf1-metallb.px1-wlzone.dreamcamtrue.com:9094
+            is_enabled: true
+            bootstrap_servers: kafka:9092
+            auto_offset_reset: earliest
             sasl_mechanism: SCRAM-SHA-256
             security_protocol: SASL_PLAINTEXT
-            username: user1
-            password: TpjstVcGeX
-            topics: []
-            max_retry: 5
-            is_enabled: false
-            producer:
-                group: streamNodeGroup
+            username: stream-manager
+            password: stream-manager-password
+            client:
+                id: mp-stream-server-service
             consumer:
                 group: streamNodeGroup
+            topics: []
+            max_retry: 5
         api:
             schema: http
             host: 0.0.0.0
@@ -139,19 +140,17 @@ stream_server:
     bss:
         url: http://bss.dev.dreamcamtrue.com:8600
         kafka:
-            bootstrap_servers: kaf1-metallb.px1-wlzone.dreamcamtrue.com:9094
+            is_enabled: true
+            bootstrap_servers: kafka:9092
             auto_offset_reset: earliest
             sasl_mechanism: SCRAM-SHA-256
             security_protocol: SASL_PLAINTEXT
-            username: user1
-            password: TpjstVcGeX
-            is_enabled: false
+            username: stream-manager
+            password: stream-manager-password
             client:
                 id: stream-server-service
             topics: []
             max_retry: 5
-            producer:
-                group: streamBssGroup
             consumer:
                 group: streamBssGroup
             passthroughTopic: passthroughTopic

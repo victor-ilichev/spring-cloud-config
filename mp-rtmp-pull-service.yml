@@ -102,15 +102,15 @@ dream:
         bss:
             url: http://dc-dream.dew:8090
         kafka:
-            host: kaf1-metallb.px1-wlzone.dreamcamtrue.com:9094
+            is_enabled: true
+            bootstrap_servers: kafka:9092
+            auto_offset_reset: earliest
             sasl_mechanism: SCRAM-SHA-256
             security_protocol: SASL_PLAINTEXT
-            username: user1
-            password: TpjstVcGeX
-            topic:
-                - streamNodeChangeTopic
+            username: rtmp-pull
+            password: rtmp-pull-password
+            topics: []
             max_retry: 5
-            is_enabled: true
             producer:
                 group: streamNodeGroup
             consumer:
