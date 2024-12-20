@@ -139,6 +139,20 @@ stream_manager_client:
 stream_server:
     bss:
         url: http://bss.dev.dreamcamtrue.com:8600
+        kafka:
+            host: kaf1-metallb.px1-wlzone.dreamcamtrue.com:9094
+            sasl_mechanism: SCRAM-SHA-256
+            security_protocol: SASL_PLAINTEXT
+            username: user1
+            password: TpjstVcGeX
+            topic:
+                - passthroughTopic
+            max_retry: 5
+            is_enabled: false
+            producer:
+                group: streamNodeGroup
+            consumer:
+                group: streamNodeGroup
     server:
         localDebugMode: false
         name: stream-d
