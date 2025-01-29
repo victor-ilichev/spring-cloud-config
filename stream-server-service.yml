@@ -145,7 +145,7 @@ stream_server:
             security_protocol: SASL_PLAINTEXT
             username: user1
             password: TpjstVcGeX
-            is_enabled: false
+            is_enabled: true
             client:
                 id: stream-server-service
             topics: []
@@ -194,8 +194,8 @@ stream_server:
         maxGopCount: 2
         InitPath: ./fmp4/
         muxer:
-            audioTimebase: 44100
-            videoTimebase: 90000
+            audioTimebase: 48000
+            videoTimebase: 48000
     srt:
         host: 0.0.0.0
         port: 11530
@@ -204,8 +204,8 @@ stream_server:
         maxGopCount: 2
         InitPath: ./fmp4/
         muxer:
-            audioTimebase: 44100
-            videoTimebase: 90000
+            audioTimebase: 48000
+            videoTimebase: 48000
     hls:
         mode: 0
         buffer: 2
@@ -216,6 +216,7 @@ stream_server:
         needCORSHeaders: false
         muxerBufferSize: 300
         maxGopCount: 2
+        filesPath: ./fmp4/hls/
     mp4:
         muxerBufferSize: 300
         maxGopCount: 2
@@ -225,6 +226,7 @@ stream_server:
         writeDeadLine: 2
         keyframeStart: true
         pullTimeout: 2
+        chanSize: 200
         servers:
             - ws://0.0.0.0:1444
         pushDump:
