@@ -176,16 +176,26 @@ stream_server:
             authBroadcast: true
             exposeCamIP: true
             exposeToken: true
+        dc-test:
+            apiToken: test_token
+            skipAPIAuth: false
+            showAllViewers: true
+            webHookURL: https://webhook.stream.dev.dreamcamtrue.com/webhook?partnerId=dc-test
+            legacyWebHook: false
+            authBroadcast: true
+            exposeCamIP: true
+            exposeToken: true
     profiler:
         enable: false
         host: 0.0.0.0
         port: 6060
         urlWithoutSchema: 0.0.0.0:6060
     log:
-        path: /proc/self/fd/2
-        level: 4
-        stdout: true
-        tag: stream-dreamcam
+        level: trace
+        stdout: false
+        pretty: false
+        color: false
+        timeFormat: "2006-01-02T15:04:05Z07:00"
     api:
         schema: http
         host: 0.0.0.0
