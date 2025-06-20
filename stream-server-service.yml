@@ -237,6 +237,8 @@ stream_server:
         muxerBufferSize: 300
         maxGopCount: 2
         filesPath: ./fmp4/hls/
+        workerDiff: 1m
+        workerInterval: 1m
     mp4:
         muxerBufferSize: 300
         maxGopCount: 2
