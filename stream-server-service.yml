@@ -226,6 +226,14 @@ stream_server:
         muxer:
             audioTimebase: 48000
             videoTimebase: 48000
+        enforcedEncryption: false
+        peerIdleTimeout: 4s
+        payloadSize: 1316
+        latency: 250ms
+        peerLatency: 250ms
+        sendDropDelay: 2s
+        connectionTimeout: 4s
+        tooLatePacketDrop: false
     hls:
         mode: 0
         buffer: 2
