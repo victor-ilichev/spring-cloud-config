@@ -278,6 +278,5 @@ stream_server:
         allowedOnErrorRetries: -1
     streamDecoderAPI:
         host: http://localhost/
-initManager:
-    basePath: "./tmp/init-files"
-
+    initManager:
+        basePath: "./tmp/init-files"
