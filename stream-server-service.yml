@@ -279,4 +279,4 @@ stream_server:
     streamDecoderAPI:
         host: http://localhost/
     initManager:
-        basePath: "./tmp/init-files"
+        basePath: "./temp/init-files"
