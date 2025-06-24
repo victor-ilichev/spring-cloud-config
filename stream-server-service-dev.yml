@@ -23,8 +23,8 @@ stream_server:
         port: 1460
         initPath: ./temp/
         muxer:
-            audioTimebase: 44101
-            videoTimebase: 90001
+            audioTimebase: 48000
+            videoTimebase: 48000
     hls:
         buffer: 3
         needCORSHeaders: true
