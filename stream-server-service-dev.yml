@@ -19,6 +19,8 @@ stream_server:
             is_enabled: true
     server:
         localDebugMode: true
+    socket:
+        chanSize: 25
     rtmp:
         port: 1460
         initPath: ./temp/
